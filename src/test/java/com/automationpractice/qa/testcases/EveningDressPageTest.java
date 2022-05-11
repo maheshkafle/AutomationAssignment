@@ -8,12 +8,12 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class LoginPageTest extends TestBase {
+public class EveningDressPageTest extends TestBase {
 
     LoginPage loginPage;
     EveningDressPage eveningDressPage;
 
-    public LoginPageTest(){
+    public EveningDressPageTest(){
         // BaseClass constructor will be called and properties will be initialized
         super();
     }
@@ -22,18 +22,17 @@ public class LoginPageTest extends TestBase {
     public void setUp(){
         initialization();
         loginPage =  new LoginPage();
+        eveningDressPage = loginPage.NavigateToEveningDressesPage();;
     }
 
     @Test(priority = 1)
-    public void ClickEveningDressButtonTest() throws InterruptedException {
-        String title = loginPage.validateLoginPageTitle();
-        Assert.assertEquals(title, "My Store");
-        eveningDressPage = loginPage.NavigateToEveningDressesPage();
+    public void verifyEveningDressPageTest(){
+        String eveningDressPageTitle = eveningDressPage.verifyEveningDressPageTitle();
+        Assert.assertEquals(eveningDressPageTitle, "EVENING DRESSES ", "EveningDresses Page Title Not Matched");
     }
 
     @AfterMethod
     public void tearDown(){
         driver.quit();
     }
-
 }

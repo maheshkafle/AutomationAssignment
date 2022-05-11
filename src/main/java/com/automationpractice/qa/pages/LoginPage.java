@@ -8,33 +8,30 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage extends TestBase {
 
-    // PageFactory / Object Repositories / Collection of WebElements
-    @FindBy(xpath="//li[@class='sfHoverForce sfHover']//a[@title='Dresses'][normalize-space()='Dresses']")
-    WebElement Dresses;
+    // PageFactory | Object Repositories | Collection of WebElements
+    @FindBy(xpath = "//a[@title='Women']")
+    WebElement btn_women;
 
-    @FindBy(xpath="//li[@class='sfHover']//a[@title='Evening Dresses'][normalize-space()='Evening Dresses']")
-    WebElement EveningDresses;
+    @FindBy(xpath = "//li[@class='sfHover']//a[@title='Evening Dresses']")
+    WebElement link_hover_evening_dresses;
 
     // Initializing Page Objects with Constructor
-    public LoginPage(){
+    public LoginPage() {
         PageFactory.initElements(driver, this);
     }
 
     // Actions
-    public String validateLoginPageTitle()  {
+    public String validateLoginPageTitle() {
         return driver.getTitle();
     }
 
-    public EveningDressPage login(String uname, String pwd){
-
-        Actions action  = new Actions(driver);
-        action.moveToElement(Dresses).perform();
-
+    public EveningDressPage NavigateToEveningDressesPage() {
+        Actions action = new Actions(driver);
+        action.moveToElement(btn_women).build().perform();
+        action.moveToElement(link_hover_evening_dresses).build().perform();
+        link_hover_evening_dresses.click();
         return new EveningDressPage();
     }
-
-
-
 
 
 }

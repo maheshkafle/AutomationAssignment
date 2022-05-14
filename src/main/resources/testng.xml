@@ -4,8 +4,7 @@
 
     <test name="Automation Practice Regression Test">
         <classes>
-            <class name="com.automationpractice.qa.testcases.LoginPageTest"></class>
-            <class name="com.automationpractice.qa.testcases.EveningDressPageTest"></class>
+            <class name="com.automationpractice.qa.testcases.RegistrationPageTest"></class>
         </classes>
     </test>
 </suite>

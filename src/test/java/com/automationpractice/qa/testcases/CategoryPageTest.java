@@ -1,22 +1,23 @@
 package com.automationpractice.qa.testcases;
 
 import com.automationpractice.qa.base.TestBase;
-import com.automationpractice.qa.pages.EveningDressPage;
-import com.automationpractice.qa.pages.LoginPage;
-import com.automationpractice.qa.pages.PrintedDressPage;
+import com.automationpractice.qa.pages.*;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class EveningDressPageTest extends TestBase {
+import static org.testng.Assert.assertTrue;
+
+public class CategoryPageTest extends TestBase {
 
     LoginPage loginPage;
     EveningDressPage eveningDressPage;
     PrintedDressPage printedDressPage;
+    CategoryPage categoryPage;
+    CartSummaryPage cartSummaryPage;
 
-    public EveningDressPageTest(){
-        // BaseClass constructor will be called and properties will be initialized
+    public CategoryPageTest(){
         super();
     }
 
@@ -25,13 +26,15 @@ public class EveningDressPageTest extends TestBase {
         initialization();
         loginPage =  new LoginPage();
         eveningDressPage = loginPage.NavigateToEveningDressesPage();
+        printedDressPage =  eveningDressPage.NavigateToPrintedDressPage();
+        categoryPage = printedDressPage.VerifyNavigateToCategoryPage();
     }
 
     @Test(priority = 1)
-    public void verifyNavigateToPrintedDressPage(){
-        String eveningDressPageTitle = eveningDressPage.verifyEveningDressPageTitle();
-        Assert.assertEquals(eveningDressPageTitle, "EVENING DRESSES ", "EveningDresses Page Title Not Matched");
-        printedDressPage =  eveningDressPage.NavigateToPrintedDressPage();
+    public void verifyNavigateToCartSummaryPageTest() {
+        String categoryPageTitle = categoryPage.verifyCategoryPageTitle();
+        assertTrue(categoryPageTitle.contains("s"));
+        cartSummaryPage = categoryPage.verifyNavigateToCartSummaryPage();
     }
 
     @AfterMethod
